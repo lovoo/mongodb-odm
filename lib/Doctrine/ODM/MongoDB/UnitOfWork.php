@@ -944,6 +944,10 @@ class UnitOfWork implements PropertyChangedListener
             }
         }
 
+        if ( ! $assoc['isCascadePersist']) {
+            return; // "Persistence by reachability" only if persist cascade specified
+        }
+
         // Look through the documents, and in any of their associations,
         // for transient (new) documents, recursively. ("Persistence by reachability")
         // Unwrap. Uninitialized collections will simply be empty.
